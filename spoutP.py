@@ -55,7 +55,8 @@ def main(argv):
         sys.exit(1)
 
     # doStuff(args.inputFile, args.outputFile)
-    open(args.outputFile, 'wb').write(','.join(map(float, [args.Cmax, args.Ymax, args.Smax, args.Smean, args.Dmax])))
+    outargs = [args.Cmax, args.Ymax, args.Smax, args.Smean, args.Dmax]
+    open(args.outputFile, 'wb').write(','.join(map(float, outargs)))
 
 
 
