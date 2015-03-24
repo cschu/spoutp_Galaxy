@@ -4,11 +4,11 @@
 	  <requirement type="package" version="2.7.4">python</requirement>	  
 	</requirements>
 	<command interpreter="python">spoutP.py
-		--Cmax="${organismType.Cmax}" 
-		--Ymax="${organismType.Ymax}" 
-		--Smax="${organismType.Smax}" 
-		--Smean="${organismType.Smean}" 
-		--Dmax="${organismType.Dmax}" 
+		--Cmax="${organismType.fields.Cmax}" 
+		--Ymax="${organismType.fields.Ymax}" 
+		--Smax="${organismType.fields.Smax}" 
+		--Smean="${organismType.fields.Smean}" 
+		--Dmax="${organismType.fields.Dmax}" 
 		$spout_in $naseq_in $aaseq_in $out
 		</command>
 	<inputs>
