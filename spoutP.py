@@ -56,7 +56,7 @@ def main(argv):
 
     # doStuff(args.inputFile, args.outputFile)
     outargs = [args.Cmax, args.Ymax, args.Smax, args.Smean, args.Dmax]
-    open(args.outputFile, 'wb').write(','.join(map(float, outargs)))
+    open(args.outputFile, 'wb').write(','.join(map(str, outargs)))
 
 
 
