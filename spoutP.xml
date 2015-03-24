@@ -4,10 +4,15 @@
 	  <requirement type="package" version="2.7.4">python</requirement>	  
 	</requirements>
 	<command interpreter="python">spoutP.py
+		--Cmax="${organismType.Cmax}" 
+		--Ymax="${organismType.Ymax}" 
+		--Smax="${organismType.Smax}" 
+		--Smean="${organismType.Smean}" 
+		--Dmax="${organismType.Dmax}" 
 		$spout_in $naseq_in $aaseq_in $out
 		</command>
 	<inputs>
-		<param name="organismType" type="select" label="The organism type.">
+		<param name="organismType" type="select" label="Organism type.">
 			<options from_data_table="spoutP_cutoffs">
 				<filter type="sort_by" column="2" />
 				<validator type="no_options" message="No cutoff parameters found." />
