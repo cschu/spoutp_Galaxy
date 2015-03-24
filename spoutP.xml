@@ -9,7 +9,7 @@
 	<inputs>
 		<param name="organismType" type="select" label="The organism type.">
 			<options from_data_table="spoutP_cutoffs">
-				<filter type="sort_by" columns="2" />
+				<filter type="sort_by" column="2" />
 				<validator type="no_options" message="No cutoff parameters found." />
 			</options>
 		</param>
