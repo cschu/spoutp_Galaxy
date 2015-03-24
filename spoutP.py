@@ -7,14 +7,15 @@ import subprocess
 import struct
 import shutil
 import tempfile
+import csv
 
 from biolib import anabl_getContigsFromFASTA as readFASTA, translateCDS
 
 
 def doStuff(args):
     with open(args.outputFile, 'wb') as out:
-        for line in open(args.spoutFile):
-            out.write(line)
+        for row in csv.reader(open(args.spoutFile), delimiter='\t', quotechar='"'):
+            for i, col in enumerate(row): out.write('%i: %s\n' % (i, col))
     
     pass
 
