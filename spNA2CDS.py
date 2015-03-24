@@ -18,26 +18,26 @@ def doStuff(fi, fo):
             # that start with MET
             # if seq[:3].upper().replace('U', 'T') == 'ATG':
             # that is actually done by translateCDS
-            fo.write('>%s\n%s\n' % translateCDS(seq))
+            out.write('>%s\n%s\n' % (id_, translateCDS(seq)))
     pass
 
 def main(argv):
     
     descr = ''
     parser = argparse.ArgumentParser(description=descr)
-    parser.add_argument('in', type=str, help='The nucleic acid input file.')
-    parser.add_argument('out', type=str, help='The translated coding sequences.')
+    parser.add_argument('inputFile', type=str, help='The nucleic acid input file.')
+    parser.add_argument('outputFile', type=str, help='The translated coding sequences.')
     
     try:
         args = parser.parse_args()
     except:
         sys.exit(1)
 
-    if not os.path.exists(args.in):
-        sys.stderr.write('Input file (%s) is missing.\n' % args.in)
+    if not os.path.exists(args.inputFile):
+        sys.stderr.write('Input file (%s) is missing.\n' % args.inputFile)
         sys.exit(1)
 
-    doStuff(args.in, args.out)
+    doStuff(args.inputFile, args.outputFile)
 
 
     pass
