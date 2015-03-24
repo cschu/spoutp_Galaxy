@@ -47,6 +47,8 @@ PRED_HEADER = ['#SeqID', 'NA_Seq', 'Pep_Seq', 'seqlen_NA', 'seqlen_Pep',
 def doStuff(args):
     secreted = []
     for row in csv.reader(open(args.spoutFile), delimiter='\t', quotechar='"'):
+        if row.startswith('#'):
+            continue
         # for i, col in enumerate(row): out.write('%i: %s\n' % (i, col))
         if (float(row[7]) > args.Smax) or (float(row[4]) > args.Ymax) or (float(row[10]) > args.Smean):
             secreted.append([row[0], None, None, None, None, int(row[5]) - 1, int(row[5]), None, None, None, None, None])
