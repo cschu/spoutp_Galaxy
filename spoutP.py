@@ -57,9 +57,9 @@ def doStuff(args):
             secreted[id_][1] = seq
             secreted[id_][3] = len(seq)
             secreted[id_][6] = secreted[id_][3] - secreted[id_][4]
-            secreted[id_][7] = '%s-%s' % (seq[secPept[4] - 3:secPept[4]], seq[secPept[4]:secPept[4] + 2])
-            secreted[id_][9] = seq[:secPept[4]]
-            secreted[id_][10] = seq[secPept[4]:]
+            secreted[id_][7] = '%s-%s' % (seq[secreted[id_][4] - 3:secreted[id_][4]], seq[secreted[id_][4]:secreted[id_][4] + 2])
+            secreted[id_][9] = seq[:secreted[id_][4]]
+            secreted[id_][10] = seq[secreted[id_][4]:]
 
     
     with open(args.outputFile, 'wb') as out:
