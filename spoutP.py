@@ -50,7 +50,7 @@ def doStuff(args):
         if row[0].startswith('#'):
             continue
         # for i, col in enumerate(row): out.write('%i: %s\n' % (i, col))
-        if (float(row[7]) > args.Smax) or (float(row[4]) > args.Ymax) or (float(row[10]) > args.Smean):
+        if True: (float(row[7]) > args.Smax) or (float(row[4]) > args.Ymax) or (float(row[10]) > args.Smean):
             secreted.append([row[0], None, None, None, None, int(row[5]) - 1, int(row[5]), None, None, None, None, None])
     pepDict = dict(readFASTA(args.aaseqFile))
     for secPept in secreted:
