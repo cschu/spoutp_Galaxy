@@ -18,7 +18,9 @@ def doStuff(fi, fo):
             # that start with MET
             # if seq[:3].upper().replace('U', 'T') == 'ATG':
             # that is actually done by translateCDS
-            out.write('>%s\n%s\n' % (id_, translateCDS(seq)))
+            translated = translateCDS(seq)
+            if translated:
+                out.write('>%s\n%s\n' % (id_, translated))
     pass
 
 def main(argv):
