@@ -1,0 +1,21 @@
+<tool id="spoutP" name="spoutP">
+	<description>Extract secreted protein sequences</description>
+	<requirements>
+	  <requirement type="package" version="2.7.4">python</requirement>	  
+	</requirements>
+	<command interpreter="python">spoutP.py
+		$spout_in $naseq_in $aaseq_in $out
+		</command>
+	<inputs>
+		<param name="spout_in" type="data" format="tabular" label="SignalP-3.0 output" />
+		<param name="naseq_in" type="data" format="fasta" label="Source nucleic acid sequences" />
+		<param name="aaseq_in" type="data" format="fasta" label="Source amino acid sequences" />
+	</inputs>
+	<outputs>
+		<data format="tabular" name="out" label="SignalP-predicted secreted peptides ${on_string}" />
+	</outputs>
+
+	<help>
+	This tool compiles information on peptides that were predicted to be secreted by SignalP-3.0.
+	</help>
+</tool>
