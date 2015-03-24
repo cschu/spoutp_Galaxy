@@ -1,0 +1,19 @@
+<tool id="spNA2CDS" name="spNA2CDS">
+	<description>Extract translated peptides from nucleic acid sequences</description>
+	<requirements>
+	  <requirement type="package" version="2.7.4">python</requirement>	  
+	</requirements>
+	<command interpreter="python">spNA2CDS.py
+		$in $out
+		</command>
+	<inputs>
+		<param name="in" type="data" format="fasta" label="FastA file" />
+	</inputs>
+	<outputs>
+		<data format="fasta" name="out" label="Peptides from translating ${on_string}" />
+	</outputs>
+
+	<help>
+	This tool translates nucleic acids into peptides without mangling the fasta header.
+	</help>
+</tool>
