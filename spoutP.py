@@ -44,13 +44,19 @@ def main(argv):
     except:
         sys.exit(1)
 
-    if not os.path.exists(args.inputFile):
-        sys.stderr.write('Input file (%s) is missing.\n' % args.inputFile)
+    if not os.path.exists(args.spoutFile):
+        sys.stderr.write('Input file (%s) is missing.\n' % args.spoutFile)
+        sys.exit(1)
+    if not os.path.exists(args.naseqFile):
+        sys.stderr.write('Input file (%s) is missing.\n' % args.naseqFile)
+        sys.exit(1)
+    if not os.path.exists(args.aaseqFile):
+        sys.stderr.write('Input file (%s) is missing.\n' % args.aaseqFile)
         sys.exit(1)
 
     # doStuff(args.inputFile, args.outputFile)
     open(args.outputFile, 'wb').write(','.join(map(float, [args.Cmax, args.Ymax, args.Smax, args.Smean, args.Dmax])))
-    
+
 
 
     pass
