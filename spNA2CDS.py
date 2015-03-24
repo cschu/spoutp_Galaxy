@@ -20,7 +20,7 @@ def doStuff(fi, fo):
             # that is actually done by translateCDS
             translated = translateCDS(seq)
             if translated:
-                out.write('>%s\n%s\n' % (id_, translated))
+                out.write('>%s\n%s\n' % (id_, translated.split('*')[0]))
     pass
 
 def main(argv):

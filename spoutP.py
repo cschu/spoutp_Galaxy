@@ -45,26 +45,31 @@ PRED_HEADER = ['#SeqID', 'NA_Seq', 'Pep_Seq', 'seqlen_NA', 'seqlen_Pep',
 
 
 def doStuff(args):
-    secreted = []
+    secreted = {}
     for row in csv.reader(open(args.spoutFile), delimiter='\t', quotechar='"'):
         if row[0].startswith('#'):
             continue
         # for i, col in enumerate(row): out.write('%i: %s\n' % (i, col))
         if True: #(float(row[7]) > args.Smax) or (float(row[4]) > args.Ymax) or (float(row[10]) > args.Smean):
-            secreted.append([row[0], None, None, None, None, int(row[5]) - 1, int(row[5]), None, None, None, None, None])
-    pepDict = dict(readFASTA(args.aaseqFile))
-    for secPept in secreted:
-        secPept[2] = pepDict.get(secPept[0], '')
-        secPept[4] = len(secPept[2])
-        secPept[7] = secPept[4] - secPept[5]
-        secPept[8] = ''
-        secPept[10] = secPept[2][:secPept[5]]
-        secPept[11] = secPept[2][secPept[5]:]
-    del pepDict
+            secreted[row[0]] = [None, None, None, None, int(row[5]) - 1, int(row[5]), None, None, None, None, None])
+    for id_, seq in dict(readFASTA(args.aaseqFile)):
+        if id_ in secreted:
+            secreted[id_][1] = seq
+            secreted[id_][3] = len(seq)
+            secreted[id_][6] = secreted[id_][3] - secreted[id_][4]
+            secreted[id_][7] = '%s-%s' % (seq[secPept[4] - 3:secPept[4]], seq[secPept[4]:secPept[4] + 2])
+            secreted[id_][9] = seq[:secPept[4]]
+            secreted[id_][10] = seq[secPept[4]:]
 
+    
     with open(args.outputFile, 'wb') as out:
-        for secPept in secreted:
-            out.write('\n'.join(map(str, secPept)) + '\n')
+        for id_, seq in dict(readFASTA(args.naseqFile)):
+            if id_ in secreted:
+                secreted[id_][0] = seq
+                secreted[id_][2] = len(seq)
+                secreted[id_][8] = seq[secreted[id_][4] * 3:]
+    
+            out.write('\t'.join(map(str, secPept)) + '\n')
         pass
     
     pass
