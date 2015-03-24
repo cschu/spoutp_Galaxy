@@ -7,6 +7,12 @@
 		$spout_in $naseq_in $aaseq_in $out
 		</command>
 	<inputs>
+		<param name="organismType" type="select" label="The organism type.">
+			<options from_data_table="spoutP_cutoffs">
+				<filter type="sort_by" columns="2" />
+				<validator type="no_options" message="No cutoff parameters found." />
+			</options>
+		</param>
 		<param name="spout_in" type="data" format="tabular" label="SignalP-3.0 output" />
 		<param name="naseq_in" type="data" format="fasta" label="Source nucleic acid sequences" />
 		<param name="aaseq_in" type="data" format="fasta" label="Source amino acid sequences" />
