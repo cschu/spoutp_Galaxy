@@ -50,7 +50,7 @@ def doStuff(args):
         if row[0].startswith('#'):
             continue
         # for i, col in enumerate(row): out.write('%i: %s\n' % (i, col))
-        if True: #(float(row[7]) > args.Smax) or (float(row[4]) > args.Ymax) or (float(row[10]) > args.Smean):
+        if (float(row[7]) > args.Smax) or (float(row[4]) > args.Ymax) or (float(row[10]) > args.Smean):
             secreted[row[0]] = [None, None, None, None, int(row[5]) - 1, int(row[5]), None, None, None, None, None]
     for id_, seq in readFASTA(args.aaseqFile):
         if id_ in secreted:
@@ -63,6 +63,7 @@ def doStuff(args):
 
     
     with open(args.outputFile, 'wb') as out:
+        out.write('\t'.join(PREAD_HEADER) + '\n')
         for id_, seq in readFASTA(args.naseqFile):
             if id_ in secreted:
                 secreted[id_][0] = seq
@@ -78,11 +79,11 @@ def main(argv):
     
     descr = ''
     parser = argparse.ArgumentParser(description=descr)
-    parser.add_argument('--Cmax', default=0.32)
-    parser.add_argument('--Ymax', default=0.33)
-    parser.add_argument('--Smax', default=0.87)
-    parser.add_argument('--Smean', default=0.48)
-    parser.add_argument('--Dmax', default=0.43)
+    parser.add_argument('--Cmax', type=float, default=0.32)
+    parser.add_argument('--Ymax', type=float, default=0.33)
+    parser.add_argument('--Smax', type=float, default=0.87)
+    parser.add_argument('--Smean', type=float, default=0.48)
+    parser.add_argument('--Dmax', type=float, default=0.43)
 
 
     parser.add_argument('spoutFile', type=str, help='.')

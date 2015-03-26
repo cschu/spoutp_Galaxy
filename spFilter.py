@@ -7,7 +7,9 @@ import argparse
 
 def doStuff(args):
 	with open(args.filteredFile, 'wb') as out:
-		for row in csv.reader(open(args.spoutFile), delimiter='\t', quotechar='"'):
+		reader = csv.reader(open(args.spoutFile), delimiter='\t', quotechar='"')
+		out.write('\t'.join(reader.next()) + '\n')
+		for row in reader:
 			if len(row) == 12:
 				matureLength, signalLength = map(int, [row[7], row[5]])
 			else:
