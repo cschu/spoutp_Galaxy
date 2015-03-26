@@ -1,0 +1,24 @@
+<tool id="spFilter" name="spFilter">
+	<description>Filter predicted secreted peptides</description>
+	<requirements>
+	  <requirement type="package" version="2.7.4">python</requirement>	  
+	</requirements>
+	<command interpreter="python">spFilter.py
+		--minSignalLength="${minSignalLength}" 
+		--minMatureLength="${minMatureLength}" 		
+		$spout_in $out
+		</command>
+	<inputs>
+		<param name="minSignalLength" type="integer" label="Minimal length of signal peptide." value="5" default="5" /> 
+		<param name="minMatureLength" type="integer" label="Minimal length of mature peptide." value="10" default="10" /> 
+
+		<param name="spout_in" type="data" format="tabular" label="spoutP output" />
+	</inputs>
+	<outputs>
+		<data format="tabular" name="out" label="Filtered SignalP-predicted secreted peptides ${on_string}" />
+	</outputs>
+
+	<help>
+	This tool filters information on peptides that were predicted to be secreted by SignalP-3.0.
+	</help>
+</tool>
