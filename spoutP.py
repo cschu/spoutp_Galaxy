@@ -63,7 +63,7 @@ def doStuff(args):
 
     
     with open(args.outputFile, 'wb') as out:
-        out.write('\t'.join(PREAD_HEADER) + '\n')
+        out.write('\t'.join(PRED_HEADER) + '\n')
         for id_, seq in readFASTA(args.naseqFile):
             if id_ in secreted:
                 secreted[id_][0] = seq
