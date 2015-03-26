@@ -5,10 +5,10 @@ import csv
 import argparse
 
 
-def doStuff(args):
-	out.write('X\n')
+def doStuff(args):	
 	with open(args.filteredFile, 'wb') as out:
 		reader = csv.reader(open(args.spoutFile), delimiter='\t', quotechar='"')
+		out.write('X\n')
 		out.write('\t'.join(reader.next()) + '\n')
 		for row in reader:
 			out.write(str(len(row)) + '\n')
