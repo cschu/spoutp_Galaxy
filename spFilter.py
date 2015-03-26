@@ -1,17 +1,22 @@
 #!/usr/bin/env python
 
+import os 
 import sys
 import csv
 import argparse
 
 
 def doStuff(args):	
+	#print "zz"
 	with open(args.filteredFile, 'wb') as out:
 		reader = csv.reader(open(args.spoutFile), delimiter='\t', quotechar='"')
-		out.write('X\n')
-		out.write('\t'.join(reader.next()) + '\n')
+		#out.write('X\n')
+		#out.write('\t'.join(reader.next()) + '\n')
 		for row in reader:
-			out.write(str(len(row)) + '\n')
+			if row[0].startswith('#'):
+				out.write('\t'.join(row) + '\n')
+				continue
+			# out.write(str(len(row)) + '\n')
 			if len(row) == 12:				
 				matureLength, signalLength = map(int, [row[7], row[5]])
 			else:
@@ -37,6 +42,7 @@ def main(argv):
 	try:
 		args = parser.parse_args()
 	except:
+		# print "xx"
 		sys.exit(1)
 
 	if not os.path.exists(args.spoutFile):
@@ -44,3 +50,6 @@ def main(argv):
 		sys.exit(1)
 
 	doStuff(args)
+
+
+if __name__ == '__main__': main(sys.argv[1:])
