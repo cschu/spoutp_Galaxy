@@ -10,7 +10,8 @@ def doStuff(args):
 		reader = csv.reader(open(args.spoutFile), delimiter='\t', quotechar='"')
 		out.write('\t'.join(reader.next()) + '\n')
 		for row in reader:
-			if len(row) == 12:
+			out.write(str(len(row)) + '\n')
+			if len(row) == 12:				
 				matureLength, signalLength = map(int, [row[7], row[5]])
 			else:
 				matureLength, signalLength = len(row[2]) - int(row[5]), int(row[5])
