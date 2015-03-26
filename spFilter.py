@@ -6,6 +6,7 @@ import argparse
 
 
 def doStuff(args):
+	out.write('X\n')
 	with open(args.filteredFile, 'wb') as out:
 		reader = csv.reader(open(args.spoutFile), delimiter='\t', quotechar='"')
 		out.write('\t'.join(reader.next()) + '\n')
