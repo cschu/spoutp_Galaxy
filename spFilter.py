@@ -21,14 +21,27 @@ def doStuff(args):
 			if row[2] in uniquePeptides:
 				continue
 			uniquePeptides.add(row[2])
-			if len(row) == 12:				
+			if len(row) == 12:
+				# new format
 				matureLength, signalLength = map(int, [row[7], row[5]])
 			else:
-				matureLength, signalLength = len(row[2]) - int(row[5]), int(row[5])
+				# old format - rewrite some information
+				# strip STOP-signal
+				row[2] = row[2].strip('*')
+				# and update peptide length
+				row[4] = len(row[2])
+				# compute missing mature- and signal-length				
+				posCSite = int(row[5])
+				matureLength, signalLength = len(row[2]) - posCSite, posCSite
+				# fix cleavage site signature
+				cleavageSite = '%s-%s' % (row[2][posCSite - 3:posCSite], row[2][posCSite:posCSite + 2])				
+				# add mature length and sequences of signal and mature peptides
+				row.insert(7, matureLength)				
+				row.extend([row[2][:posCSite], row[2][posCSite:]])
 
 			if matureLength >= args.minMatureLength and signalLength >= args.minSignalLength:				
 				removeRedundantCells(row)
-				out.write('\t'.join(row) + '\n')
+				out.write('\t'.join(map(str, row)) + '\n')
 		pass
 	pass
 
