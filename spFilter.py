@@ -9,7 +9,7 @@ import argparse
 def doStuff(args):	
 	def removeRedundantCells(row):
 		del row[6]
-		del row[2]
+		del row[1]
 	uniquePeptides = set()
 	with open(args.filteredFile, 'wb') as out:
 		reader = csv.reader(open(args.spoutFile), delimiter='\t', quotechar='"')
