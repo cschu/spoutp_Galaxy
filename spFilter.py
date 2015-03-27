@@ -7,26 +7,27 @@ import argparse
 
 
 def doStuff(args):	
-	#print "zz"
+	def removeRedundantCells(row):
+		del row[6]
+		del row[2]
 	uniquePeptides = set()
 	with open(args.filteredFile, 'wb') as out:
 		reader = csv.reader(open(args.spoutFile), delimiter='\t', quotechar='"')
-		#out.write('X\n')
-		#out.write('\t'.join(reader.next()) + '\n')
 		for row in reader:
 			if row[0].startswith('#'):
+				removeRedundantCells(row)
 				out.write('\t'.join(row) + '\n')
 				continue
 			if row[2] in uniquePeptides:
 				continue
 			uniquePeptides.add(row[2])
-			# out.write(str(len(row)) + '\n')
 			if len(row) == 12:				
 				matureLength, signalLength = map(int, [row[7], row[5]])
 			else:
 				matureLength, signalLength = len(row[2]) - int(row[5]), int(row[5])
-				
+
 			if matureLength >= args.minMatureLength and signalLength >= args.minSignalLength:				
+				removeRedundantCells(row)
 				out.write('\t'.join(row) + '\n')
 		pass
 	pass
