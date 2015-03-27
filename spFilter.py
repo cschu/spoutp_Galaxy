@@ -5,6 +5,8 @@ import sys
 import csv
 import argparse
 
+from spoutP import PRED_HEADER
+
 
 def doStuff(args):	
 	def removeRedundantCells(row):
@@ -12,11 +14,10 @@ def doStuff(args):
 		del row[1]
 	uniquePeptides = set()
 	with open(args.filteredFile, 'wb') as out:
+		out.write('\t'.join(PRED_HEADER) + '\n')
 		reader = csv.reader(open(args.spoutFile), delimiter='\t', quotechar='"')
 		for row in reader:
-			if row[0].startswith('#'):
-				removeRedundantCells(row)
-				out.write('\t'.join(row) + '\n')
+			if row[0].startswith('#'):				
 				continue
 			if row[2] in uniquePeptides:
 				continue
