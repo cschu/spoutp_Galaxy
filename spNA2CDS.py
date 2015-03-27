@@ -12,15 +12,19 @@ from biolib import anabl_getContigsFromFASTA as readFASTA, translateCDS
 
 
 def doStuff(fi, fo):
+    uniquePeptides = set()
     with open(fo, 'wb') as out:
         for id_, seq in readFASTA(fi):
             # here take only peptides into account 
             # that start with MET
             # if seq[:3].upper().replace('U', 'T') == 'ATG':
             # that is actually done by translateCDS
-            translated = translateCDS(seq)
+            translated = translateCDS(seq)            
             if translated:
-                out.write('>%s\n%s\n' % (id_, translated.split('*')[0]))
+                translated = translated.split('*')[0]   
+                if translated not in uniquePeptides:
+                    uniquePeptides.add(translated)
+                    out.write('>%s\n%s\n' % (id_, translated))
     pass
 
 def main(argv):
