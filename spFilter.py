@@ -9,9 +9,9 @@ from spoutP import PRED_HEADER
 
 
 def doStuff(args):	
-	def removeRedundantCells(row):
-		del row[6]
-		del row[1]
+	#def removeRedundantCells(row):
+	#	del row[6]
+	#	del row[1]
 	uniquePeptides = set()
 	with open(args.filteredFile, 'wb') as out:
 		out.write('\t'.join(PRED_HEADER) + '\n')
@@ -41,7 +41,7 @@ def doStuff(args):
 				row.extend([row[2][:posCSite], row[2][posCSite:]])
 
 			if matureLength >= args.minMatureLength and signalLength >= args.minSignalLength:				
-				removeRedundantCells(row)
+				# removeRedundantCells(row)
 				out.write('\t'.join(map(str, row)) + '\n')
 		pass
 	pass
