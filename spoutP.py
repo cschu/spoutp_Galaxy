@@ -53,6 +53,7 @@ def doStuff(args):
         if (float(row[7]) > args.Smax) or (float(row[4]) > args.Ymax) or (float(row[10]) > args.Smean):
             secreted[row[0]] = [None, None, None, None, int(row[5]) - 1, int(row[5]), None, None, None, None, None]
     for id_, seq in readFASTA(args.aaseqFile):
+        id_ = id_.split(' ')[0]
         if id_ in secreted:
             secreted[id_][1] = seq
             secreted[id_][3] = len(seq)
@@ -65,6 +66,7 @@ def doStuff(args):
     with open(args.outputFile, 'wb') as out:
         out.write('\t'.join(PRED_HEADER) + '\n')
         for id_, seq in readFASTA(args.naseqFile):
+            id_ = id_.split()[0]
             if id_ in secreted:
                 secreted[id_][0] = seq
                 secreted[id_][2] = len(seq)
